@@ -1,6 +1,14 @@
-const express = require('express');
 var userRoutes = require('./users');
+var authRoutes = require('./auth');
+const express = require('express');
+
 const router = express.Router();
+
+/**
+ * auth {{token}}
+ */
+router.use('/auth', authRoutes);
+
 
 /**
  * user routes
