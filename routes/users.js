@@ -1,34 +1,48 @@
-var _dirs = require('../util/controller.helper');
-var usercontroller = require(_dirs.paths + '/users.controller');
-var express = require('express');
-var router = express.Router();
-
 /**
- * GET USERS
+ * @author mutwol
  */
-router.get('/', usercontroller.index);
+
+ const _dirs = require('../util/controller.helper');
+const usercontroller = require(_dirs.paths + '/users.controller');
+const express = require('express');
+const router = express.Router();
+const isAuth=require('../middlewares/auth.middleware');
+const userLoggedIn=require('../middlewares/user.middleware');
+const userRole = require('../middlewares/role.middleware');
 
 /**
- * CREATE USER
+ * Get All Users
+ */
+ router.get('/',isAuth, userLoggedIn, usercontroller.index);
+
+/**
+ * Create User
  */
 router.post('/', usercontroller.store);
 
 /**
- * GET USER
+ * Get One User
  */
 router.get('/:id', usercontroller.show);
 
 /**
- * UPDATE USER 
+ * Update User 
  */
 router.patch('/:id', usercontroller.update);
 
 /**
- * DESTROY USER
+ * Destroy User
  * .. DO NOT DELETE DATA !! 😧 
  */
 
 router.delete('/:id', usercontroller.destroy);
 
-module.exports = router;
+/**
+ * Verify user account
+ */
 
+router.post('/verify/:token', usercontroller.verify);
+
+
+
+module.exports = router;

@@ -1,11 +1,26 @@
+/**
+ * @author mutwol
+ */
+
+ /**
+  * DB Config, 
+  * this should not be here !!
+  * @todo move to env
+  */
+
 const mongoose = require('mongoose');
 
 const URI = 'mongodb://localhost:27017/shop';
 
-mongoose.connect(URI, {useNewUrlParser: true });
+mongoose.connect(URI, {useCreateIndex: true, useNewUrlParser: true });
 
-mongoose.connection.on('connected', () => {
-    console.log('connected successfully to', URI);
+const db = mongoose.connection;
+
+db.on('connected', () => {
+
+    console.log('connected successfully 👍 👍, server', URI);
+    
 });
 
-mongoose.on('error', console.error.bind(console, 'Mongodb connection error'));
+
+db.on('error', console.error.bind(console, 'Mongodb connection error 😲 👎 ' ));
