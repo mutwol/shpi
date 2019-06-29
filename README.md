@@ -1,4 +1,4 @@
-## Shopi Service
+## Shpi Service
 technologies:-  ⛵️ ⛵️
 
 * [ ] :node:
